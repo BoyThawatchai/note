@@ -2,7 +2,21 @@ import React, {useState} from 'react';
 import './App.css';
 
 function App() {
-  const [noteConten, setNoteContent] = useState('');
+  const [note, setNote] = useState({
+    content: "",
+    author: ""
+  });
+
+
+  function onNoteValueChange (event) {
+    const {name, value} = event.target
+    setNote((prevNote) => {
+      return {
+        ...prevNote, [name]:value
+      }
+    });
+  } 
+
 
 
   return (
@@ -12,8 +26,11 @@ function App() {
       <div className='app-container'>
         <h3> test</h3>
         <p>
-          <input type="text" placeholder='บันทึกความในใจ' value={noteConten} onChange={(event) => {
-            setNoteContent(event.target.value)}}
+          <textarea rows={3} placeholder='บันทึกความในใจ' name="content" value={note.content} onChange={onNoteValueChange}
+          />
+        </p>
+        <p>
+          <input type="text" placeholder='ลงชื่อ' name='author' value={note.author} onChange={onNoteValueChange}
           />
         </p>
         
