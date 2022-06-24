@@ -29,11 +29,20 @@ function App() {
     setAllNotes((prevAllNotes) => {
       const newNote = {...note}
       newNote.id = Date.now().toString();
-      return [...prevAllNotes, note]
+      return [newNote, ...prevAllNotes]
     })
 
     setNote(startNote)
     
+  }
+
+  function onNoteDelete(noteId) {
+    console.log(noteId)
+    setAllNotes( (prevAllNotes) => {
+        return prevAllNotes.filter((theNote) => {
+          return theNote.id !== noteId
+        })
+    })
   }
 
   //Elements
@@ -42,7 +51,13 @@ function App() {
       <div className='app-note' key={theNote.id}>
       <p>{theNote.content}</p>
       <h5>{theNote.author}</h5>
+      <p>
+        <a>Edit</a>
+        <span> | </span>
+        <a onClick={() => {onNoteDelete(theNote.id)}}>Delete</a>
+      </p>
     </div>
+
     )
     
   })
