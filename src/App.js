@@ -39,9 +39,8 @@ function App() {
   function onNoteDelete(noteId) {
     console.log(noteId)
     setAllNotes( (prevAllNotes) => {
-        return prevAllNotes.filter((theNote) => {
-          return theNote.id !== noteId
-        })
+        return prevAllNotes.filter(theNote => theNote.id !== noteId
+        )
     })
   }
 
