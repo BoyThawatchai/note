@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import './App.css';
 
+const startNote = {
+  content: "",
+  author: ""
+}
+
 function App() {
 
   //State
-  const [note, setNote] = useState({
-    content: "",
-    author: ""
-  });
+  const [note, setNote] = useState(startNote);
 
   const [allNotes, setAllNotes] = useState([])
 
@@ -25,15 +27,19 @@ function App() {
     event.preventDefault()
 
     setAllNotes((prevAllNotes) => {
+      const newNote = {...note}
+      newNote.id = Date.now().toString();
       return [...prevAllNotes, note]
     })
+
+    setNote(startNote)
     
   }
 
   //Elements
-  const noteElements = allNotes.map((theNote, index) => {
+  const noteElements = allNotes.map((theNote) => {
     return (
-      <div className='app-note' key={index}>
+      <div className='app-note' key={theNote.id}>
       <p>{theNote.content}</p>
       <h5>{theNote.author}</h5>
     </div>
